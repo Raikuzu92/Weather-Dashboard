@@ -1,9 +1,15 @@
-const API = `api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API}`;
+const API = bf0f77ba6a49f00561b1182d3c5afe3e;
 const searchInput = document.getElementById('searchInput').value.trim();
 const searchButton = document.getElementById('searchButton');
+const storedCities = JSON.parse(localStorage.getItem('cities')) || [];
+const btnContainer = document.getElementById('buttons')
 
 
-function getData() {
+function getData(newCity) {
+    let city = searchInput.value.trim();
+    const appUrl = ////////////////////////////////
+
+
 
     fetch(apiUrl)
     const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API}`
@@ -14,6 +20,7 @@ function getData() {
 
 then(function (data) {
     renderCurrentWeather(city, data);
+    storeHistory(cities)
 })
 
     .catch(function (error) {
@@ -33,11 +40,57 @@ function renderCurrentWeather(city, weather) {
     const iconImg = document.createElement('img')
     tempH1.textContent = temp;
     windH1.textContent = wind;
-    iconImg.setAttribute('src', iconUrl)
-    humidH1.textContent = humidity
+    iconImg.setAttribute('src', iconUrl);
+    humidH1.textContent = humidity;
+    container.append(iconImg, tempH1, windH1, humidH1);
+createhistoryButton()
+}
+
+
+function storeHistory(city) {
+    storedCities.push(city);
+    localStorage.setItem('cities' .JSON.stringify(storedCities));
+
 
 }
 
+
+function createhistoryButton() {
+
+
+const thisstoredCity= JSON.parse(localStorage.getItem('cities')) || [];
+
+
+for (let i = 0; i < thisstoredCity.length; index++) {
+    
+    
+}
+const historyButton = document.createElement('button')
+historyButton.classList.add('historyBtn')
+historyButton.textContent = city[i]
+container.append(historyButton);
+btnContainer.append(historyButton)
+};
+
+function handlesearchHistory(e) {
+    if(!e.target.matches('historybtn')) {
+        return;
+    }
+
+    const target = e.target;
+    const cityname = target.textContent
+    renderCurrentWeather(cityname)
+
+
+
+
+}
+
+
+
+createhistoryButton()
+
+btnContainer.addEventListener('click', handlesearchHistory)
 
 searchButton.addEventListener('click'.getData);
 
