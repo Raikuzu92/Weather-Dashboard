@@ -1,32 +1,38 @@
-const API = bf0f77ba6a49f00561b1182d3c5afe3e;
+const API = 'bf0f77ba6a49f00561b1182d3c5afe3e';
 const searchInput = document.getElementById('searchInput').value.trim();
 const searchButton = document.getElementById('searchButton');
 const storedCities = JSON.parse(localStorage.getItem('cities')) || [];
-const btnContainer = document.getElementById('buttons')
+const btnContainer = document.getElementById('buttons');
 
+// function to get data for city
+function getData(city) {
+    let storedCities = searchInput.value.trim();
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API}`;
+    console.log(apiUrl);
 
-function getData(newCity) {
-    let city = searchInput.value.trim();
-    const appUrl = ////////////////////////////////
-
-
-
+// grabbing the api
     fetch(apiUrl)
-    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API}`
-        .then(function (response))
-    return response.json();
+    .then(function (response) {
+        return response.json();
 
-};
+    })
 
-then(function (data) {
+}
+//rendering content to page
+then(function(renderCurrentWeather) {
     renderCurrentWeather(city, data);
     storeHistory(cities)
 })
 
-    .catch(function (error) {
-        console.error(error));
-    }
+.catch(function (error) {
+    console.error(error);
+});
 
+function getInputCity() {
+let city = searchInput.value.trim()
+storeSearchhistory(city)
+}
+// all the data we need and creating dynamic elements
 function renderCurrentWeather(city, weather) {
     const temp = weather.list[0].main.temp;
     const wind = weather.list[0].wind.speed;
@@ -54,7 +60,7 @@ function storeHistory(city) {
 
 }
 
-
+// creating a history button that pulls values 
 function createhistoryButton() {
 
 
@@ -89,7 +95,7 @@ function handlesearchHistory(e) {
 
 
 createhistoryButton()
-
+//event listners for buttons
 btnContainer.addEventListener('click', handlesearchHistory)
 
 searchButton.addEventListener('click'.getData);
